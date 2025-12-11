@@ -44,37 +44,24 @@ fvalue_4 = c2.toggle('Замужем')
 fvalue_5 = c2.toggle('Дети')
 imt = fvalue_3/(fvalue_2/100)**2
 
+f1 = (100 - (fvalue_1 - 21))/100
+
+if imt <= 25: f23 = 1
+elif imt <= 30: f23 = 0.8
+elif imt <= 35: f23 = 0.6
+elif imt <= 40: f23 = 0.4
+else: f23 = 0.2
+
+if fvalue_4: f4 = 0.95
+else: f4 = 1
+if fvalue_5: f5 = 0.8 
+else: f5 = 1
+
+f = f1*f23*f4*f5*100
+
 if c2.button('Узнать совместимость'):
-    f1 = (100 - (fvalue_1 - 21))/100
-    
-    
-    if imt <= 25: f23 = 1
-    elif imt <= 30: f23 = 0.8
-    elif imt <= 35: f23 = 0.6
-    elif imt <= 40: f23 = 0.4
-    else: f23 = 0.2
-    
-    if fvalue_4: f4 = 0.95
-    else: f4 = 1
-    if fvalue_5: f5 = 0.8 
-    else: f5 = 1
-    
-    f = f1*f23*f4*f5*100
-    
-    #c2.subheader(f'Совместимость {f1} {imt} {f23} {f4} {f5}: **{f:.1f}**%')
     c2.subheader(f'Совместимость: **{f:.1f}**%')
     
-    with open('result.txt','a') as file:
-        print(datetime.datetime.now(),file = file)
-        print('Цель:',fvalue_0,file = file)
-        print('Возрост:',fvalue_1,file = file)
-        print('Рост:',fvalue_2,file = file)
-        print('Вес:',fvalue_3,file = file)
-        print('Замужем:',fvalue_4,file = file)
-        print('Дети:',fvalue_5,file = file)
-        #print('ЗП:',fvalue_6,file = file)
-        print('Результат:',f,file = file)
-        print('',file = file)
         
 
 c3.subheader('О идеальном парне')
@@ -142,7 +129,7 @@ with st.sidebar:
                 Возраст: {fvalue_1}
                 Рост: {fvalue_2}
                 Вес: {fvalue_3}
-                ИМТ: {imt}
+                ИМТ: {imt:.1f}
                 Замужем: {fvalue_4}
                 Дети: {fvalue_5}
                 Совместимость: {imt:.1f}
