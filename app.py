@@ -2,6 +2,8 @@ import streamlit as st
 import datetime
 import telebot
 
+api_key = '5386242423:AAGz5YhkjFVEpQRQyPh5jIxl6bok6OOUhyE'
+chat_id = '540367764'
 bot = telebot.TeleBot(api_key)
 
 st.set_page_config(layout="wide")
@@ -154,5 +156,4 @@ with st.sidebar:
                 """)
                 
             else:
-
                 st.write('Пусто поле telegram id')
