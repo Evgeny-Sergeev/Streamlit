@@ -8,13 +8,6 @@ bot = telebot.TeleBot(api_key)
 
 st.set_page_config(layout="wide")
 
-def make_empty_string(string_to_convert):
-    try:
-        string_to_convert
-    except NameError:
-        string_to_convert = ''
-    return string_to_convert
-
 
 with st.sidebar:
     st.header('Соцсети:')
@@ -148,8 +141,10 @@ with st.sidebar:
                 Возраст: {fvalue_1}
                 Рост: {fvalue_2}
                 Вес: {fvalue_3}
+                ИМТ: {imt}
                 Замужем: {fvalue_4}
                 Дети: {fvalue_5}
+                Совместимость: {f:.1f}
                 Заработок: {value_0}
                 Длина: {value_1}
                 Параметры: {v_string}
