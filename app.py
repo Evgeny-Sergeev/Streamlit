@@ -1,6 +1,20 @@
 import streamlit as st
 import datetime
-st.set_page_config(layout="wide")    
+import telebot
+
+api_key = '5386242423:AAGz5YhkjFVEpQRQyPh5jIxl6bok6OOUhyE'
+chat_id = '540367764'
+bot = telebot.TeleBot(api_key)
+
+st.set_page_config(layout="wide")
+
+def make_empty_string(string_to_convert):
+    try:
+        string_to_convert
+    except NameError:
+        string_to_convert = ''
+    return string_to_convert
+
 
 with st.sidebar:
     st.header('Соцсети:')
@@ -9,7 +23,6 @@ with st.sidebar:
     - [Instagram](https://instagram.com/sergeevel)
     - [VK](https://vk.com/sergeevel)
     """)
-
 
 
 c1,c2,c3 = st.columns(3)
@@ -96,7 +109,7 @@ with c3.form("О идеальном парне"):
     v_4 =  st.toggle('Физическая форма')
     v_5 =  st.toggle('Щедрость')
     v_6 =  st.toggle('Доброта и эмпатия')
-    v_7 =  st.toggle('Успешность/Целеустремленность')
+    v_7 =  st.toggle('Успешность и целеустремленность')
     v_8 =  st.toggle('Опрятность')
     v_9 =  st.toggle('Стрессоустойчивость')
     v_10 = st.toggle('Верность')
@@ -115,3 +128,32 @@ with c3.form("О идеальном парне"):
             st.write('Совпадение: 💘')
         else:
             st.write(f'Выберете меньше качеств')
+            
+with st.sidebar:
+
+    with st.form("Форма"):
+        telegram_id = st.text_input(label = 'Твой telegram id:', value = '')
+        send_tg = st.form_submit_button("Познакомиться")
+        if send_tg:
+            if telegram_id != '':
+                st.write('Приветствие отправлено')
+                try:
+                    v_list = ['Честность','Ответственность','Чувство юмора','Физическая форма','Щедрость','Доброта и эмпатия','Успешность и целеустремленность','Опрятность','Стрессоустойчивость','Верность','Способность держать слово','Общительность','Авторитетность','Умение слушать','Без вредных привычек']
+                    v_string = ', '.join(v_list[n] for n,v in enumerate([v_1,v_2,v_3,v_4,v_5,v_6,v_7,v_8,v_9,v_10,v_11,v_12,v_13,v_14,v_15]) if v)
+                except NameError:
+                    v_string = ''
+                bot.send_message(chat_id,text = f"""
+                tg = {telegram_id}
+                Цель знакомства: {fvalue_0}
+                Возраст: {fvalue_1}
+                Рост: {fvalue_2}
+                Вес: {fvalue_3}
+                Замужем: {fvalue_4}
+                Дети: {fvalue_5}
+                Заработок: {value_0}
+                Длина: {value_1}
+                Параметры: {v_string}
+                """)
+                
+            else:
+                st.write('Пусто поле telegram id')
