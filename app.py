@@ -42,11 +42,12 @@ fvalue_2 = c2.slider('Рост:',min_value  = 140,max_value  = 210,value = 160, 
 fvalue_3 = c2.slider('Вес:',min_value  = 40,max_value  = 120,value = 60, step = 1)
 fvalue_4 = c2.toggle('Замужем')
 fvalue_5 = c2.toggle('Дети')
+imt = fvalue_3/(fvalue_2/100)**2
 
 if c2.button('Узнать совместимость'):
     f1 = (100 - (fvalue_1 - 21))/100
     
-    imt = fvalue_3/(fvalue_2/100)**2
+    
     if imt <= 25: f23 = 1
     elif imt <= 30: f23 = 0.8
     elif imt <= 35: f23 = 0.6
