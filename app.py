@@ -13,6 +13,8 @@ with st.sidebar:
 
 
 c1,c2,c3 = st.columns(3)
+
+c1.subheader('Обо мне')
 c1.markdown("""
 Привет, меня зовут **Женя** 35 лет\n
 Кредитов, жен, детей нет\n
@@ -27,7 +29,7 @@ c1.markdown("""
 - Программирование
 """)
     
-c2.write('О тебе')
+c2.subheader('О тебе')
 fvalue_0  = c2.multiselect('Что хотела бы найти?',['ONS','FWB','LTR'],default=[])
 fvalue_1 = c2.slider('Возрост:',min_value  = 18,max_value  = 50,value = 30, step = 1)
 fvalue_2 = c2.slider('Рост:',min_value  = 140,max_value  = 210,value = 160, step = 1)
@@ -67,19 +69,27 @@ if c2.button('Узнать совместимость'):
         print('Результат:',f,file = file)
         print('',file = file)
         
-with с3.form("О идеальном парне"):
-    value_0 = st.slider('Сколько должен зарабатывать? (💵 тыс руб в мес)',min_value  = 0,max_value  = 1000,value = 0, step = 10)
-    if fvalue_0 <= 200: f6 = 1
-    elif fvalue_0 <= 300: f6 = 0.95
-    elif fvalue_0 <= 400: f6 = 0.9
-    elif fvalue_0 <= 600: f6 = 0.8
-    else: f6 = 0.6
+
+c3.subheader('О идеальном парне')
+value_0 = c3.slider('Сколько должен зарабатывать? (💵 тыс руб в мес)',min_value  = 0,max_value  = 1000,value = 0, step = 10)
+#if value_0 <= 200: v_0 = 1
+#elif value_0 <= 300: v_0 = 0.95
+#elif value_0 <= 400: v_0 = 0.9
+#elif value_0 <= 600: v_0 = 0.8
+#else: v_0 = 0.6
+value_1 = c3.slider('Сколько длина болта? (🔩 см)',min_value  = 7,max_value  = 24,value = 15, step = 1)
+
+if value_1 <= 14: c3.write('🧐')
+elif 15 <= value_1 <= 18: c3.write('😎')
+elif value_1 == 19: c3.write('🫤')
+elif value_1 == 20: c3.write('😯')
+elif value_1 == 21: c3.write('😮')
+elif value_1 == 22: c3.write('😲')
+elif value_1 == 23: c3.write('😧')
+elif value_1 == 24: c3.write('😨')
     
-    value_1 = st.slider('Сколько длина болта? (🔩 см)',min_value  = 7,max_value  = 24,value = 12, step = 1)
-    value_2 = st.toggle('Интеллект')
-    
-    st.write('Выберете 7 важнейших качеств для парня')
-    
+with c3.form("О идеальном парне"):    
+    st.write('Выберете 7 важнейших качеств для парня:')
     v_1 =  st.toggle('Честность')
     v_2 =  st.toggle('Ответственность')
     v_3 =  st.toggle('Чувство юмора')
@@ -96,10 +106,12 @@ with с3.form("О идеальном парне"):
     v_14 = st.toggle('Умение слушать')
     v_15 = st.toggle('Без вредных привычек')
 
-    v_sum = sum(v_1,v_2,v_3,v_4,v_5,v_6,v_7,v_8,v_9,v_10,v_11,v_12,v_13,v_14,v_15)
+    v_sum = sum([v_1,v_2,v_3,v_4,v_5,v_6,v_7,v_8,v_9,v_10,v_11,v_12,v_13,v_14,v_15])
     st.write(f'Выбрано {v_sum} из 7')
-    submitted = st.form_submit_button("Submit")
-    if submitted and v_sum <= 7:
-        st.write('У меня где то 13 из 15 этих качеств')
-    else:
-        st.write(f'Выберете меньше качеств')
+    submitted = st.form_submit_button("Пуск")
+    
+    if submitted:
+        if v_sum <= 7:
+            st.write('Совпадение: 💘')
+        else:
+            st.write(f'Выберете меньше качеств')
